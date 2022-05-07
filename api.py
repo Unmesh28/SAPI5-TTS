@@ -22,6 +22,7 @@ def getVoiceList():
 @app.route('/getAudio', methods=['GET'])
 def getAudio():
     prompt = request.args.get('prompt')
+    voiceName = request.args.get('voiceName')
     print(prompt)
     now = str(datetime.now())
     print(now)
@@ -32,7 +33,7 @@ def getAudio():
     #now = "unffddssct3t7865655930r3r" 
     command = "c:/balcon/balcon.exe -n \"VE_American_English_Ava_22kHz\" -t \"Hello there Unmesh, How are you?\" -w \"{}.wav\"".format(now)
     print(command)
-    p = subprocess.Popen("c:/balcon/balcon.exe -n \"VE_American_English_Ava_22kHz\" -t \"{}\" -w \"{}.wav\"".format(prompt,now), stdout=subprocess.PIPE, shell=True)
+    p = subprocess.Popen("c:/balcon/balcon.exe -n \"{}\" -t \"{}\" -w \"{}.wav\"".format(voiceName,prompt,now), stdout=subprocess.PIPE, shell=True)
 
     print(p.wait())
     print(p.communicate())
